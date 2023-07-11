@@ -57,16 +57,16 @@ jobs:
           sudo locale-gen en_AU.UTF-8
           echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
 
+      - name: Install theme dependencies
+        run: |
+          git clone https://github.com/call-learning/moodle-theme_clboost.git /home/runner/work/moodle-theme_test/moodle-theme_test/theme/clboost
+
       - name: Install moodle-plugin-ci
         run: |
           moodle-plugin-ci install --plugin ./plugin --db-host=127.0.0.1
         env:
           DB: ${{ matrix.database }}
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
-
-      - name: Install theme dependencies
-        run: |
-          git clone https://github.com/call-learning/moodle-theme_clboost.git theme/clboost
 
       - name: PHP Lint
         if: ${{ always() }}
