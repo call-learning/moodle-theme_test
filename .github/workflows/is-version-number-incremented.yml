@@ -7,11 +7,19 @@ jobs:
 
     steps:
 
+      - name: Get old version
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            version.php
+          sparse-checkout-cone-mode: false
+        run: git checkout HEAD^
+
       - name: Retrieve changes
         id: changes
         run: |
           git fetch --no-tags --depth=1 origin "+refs/heads/*:refs/remotes/origin/*"
-          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
+          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.repository }})
           
           echo "::set-output name=changed_files::$CHANGED_FILES"
 
