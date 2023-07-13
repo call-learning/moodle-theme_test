@@ -2,7 +2,7 @@ name: Vérification du numéro de version du plugin Moodle
 on: [push]
 
 jobs:
-  check_version:
+  getVersions:
     runs-on: ubuntu-latest
     outputs:
       old_version: ${{ steps.extract_old_version.outputs.old_version }}
@@ -34,10 +34,15 @@ jobs:
           echo $VERSION
           echo "old_version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Compare versions
-        id: compare_version
+  compare-versions:
+    runs-on: ubuntu-latest
+    needs: getVersions
+    steps:
+      - env:
+          NEW_VERSION: ${{needs.getVersions.outputs.new_version}}
+          OLD_VERSION: ${{needs.getVersions.outputs.old_version}}
         run: |
-          if [ ${{ steps.extract_old_version.outputs.old_version }} < ${{ steps.extract_new_version.outputs.new_version }} ]; then
+          if [ $((OLD_VERSION)) < $((NEW_VERSION)) ]; then
             echo "Le numéro de version a été incrémenté."
             exit 0
           fi
