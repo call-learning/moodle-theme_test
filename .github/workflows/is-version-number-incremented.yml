@@ -13,14 +13,6 @@ jobs:
             version.php
           sparse-checkout-cone-mode: false
 
-      - name: Retrieve changes
-        id: changes
-        run: |
-          git fetch --no-tags --depth=1 origin "+refs/heads/*:refs/remotes/origin/*"
-          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.repository }})
-          
-          echo "::set-output name=changed_files::$CHANGED_FILES"
-
       - name: Extract version number
         id: extract_version
         run: |
