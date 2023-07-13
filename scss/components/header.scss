@@ -1,0 +1,231 @@
+
+.navbar .navbar__logo {
+    max-height: 50px;
+    width: auto;
+}
+
+body.notloggedin {
+    .navbar.fixed-top  {
+        background-color: transparent;
+        box-shadow: none;
+        border-bottom: 1px solid transparent;
+        max-height: none;
+        font-weight: 800;
+        margin-left: auto;
+        margin-right: auto;
+
+        @include media-breakpoint-down(sm) {
+            background-color: $imt-darkblue;
+            opacity: 0.8;
+        }
+
+        .imtpn-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-nav .nav-item.currentpage {
+            border-bottom: $primary solid;
+            border-width: 2px;
+        }
+
+        &.navbar-dark {
+            .nav-link {
+                a, a:hover, a:visited {
+                    font-weight: bold;
+                    color: $navbar-dark-color;
+                    text-decoration: none;
+                }
+            }
+            .moremenu {
+                .nav-link {
+                    background-color: transparent;
+                    border: 0;
+                    color: $navbar-dark-color;
+                    font-weight: 800;
+                }
+            }
+        }
+    }
+
+    .nav-border-bottom {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        position: fixed;
+        z-index: 1050;
+        box-shadow: none;
+    }
+    header.header {
+        position: relative;
+        min-height: $navbar-height;
+        @include media-breakpoint-up(sm) {
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            z-index: $zindex-fixed - 1
+        }
+
+        flex: 0 0 auto;
+
+        background-image: url([[pix:theme|backgrounds/header]]);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        color: $white;
+
+        .header__triangle-1 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            background: $primary;
+            opacity: 0.8;
+
+            width: 62%;
+            height: 100%;
+
+            @include media-breakpoint-down(md) {
+                width: 52%;
+            }
+
+            @include media-breakpoint-down(sm) {
+                width: 100%;
+                &::after {
+                    display: none;
+                }
+            }
+
+            &:after {
+                content: "";
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-color: $primary transparent transparent transparent;
+                border-width: $navbar-height $navbar-height 0 0;
+                right: -($navbar-height);
+                position: absolute;
+                top: 0;
+            }
+
+        }
+
+        .header__triangle-2 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 200px 0 0 200px;
+            border-color: transparent transparent transparent $app-gray-1;
+        }
+
+        .header__triangle-3 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 200px 200px;
+            border-color: transparent transparent $secondary transparent;
+
+            @include media-breakpoint-down(sm) {
+                display: none;
+            }
+        }
+
+        .header__bottom {
+            position: relative;
+            padding-top: 80px;
+            height: 312px;
+
+            @include media-breakpoint-down(sm) {
+                height: 262px;
+            }
+
+            .imtpn-container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                height: 100%;
+            }
+        }
+
+        .header__title {
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 42px;
+
+            @include media-breakpoint-down(sm) {
+                font-size: 20px;
+                text-align: center;
+                line-height: 30px;
+            }
+        }
+
+        .header__button {
+            margin-top: 20px;
+
+            @include media-breakpoint-down(sm) {
+                width: 100%;
+            }
+
+            a {
+                min-width: 278px;
+                font-weight: 800;
+                @include media-breakpoint-down(sm) {
+                    min-width: 0;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.navbar.fixed-top {
+    background-color: $white;
+    max-width: $course-content-maxwidth;
+    margin-left: auto;
+    margin-right: auto;
+    .popover-region-container {
+        top: 2rem;
+    }
+    .usermenu {
+        align-self: stretch;
+    }
+}
+.nav-border-bottom {
+    border-bottom: $gray-300 1px solid;
+    height: 1px;
+    position: fixed;
+    top: $navbar-height;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+
+#page-site-index.notloggedin {
+
+    header.header {
+        .header__triangle-1:after {
+            border-width: 312px 312px 0 0;
+            right: -312px;
+        }
+    }
+}
+
+#page-login-index, #page-themescat {
+    .header__triangle-3, .header__triangle-2 {
+        visibility: hidden;
+    }
+}
+
+.header-maxwidth {
+    width: 100%;
+    padding: 0;
+}

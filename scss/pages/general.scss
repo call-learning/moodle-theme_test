@@ -1,0 +1,62 @@
+#region-main {
+    border: none;
+}
+
+#page-header .card {
+    border: none;
+}
+
+// Not enough contrast on the tabs.
+.format-onetopic ul.nav-tabs li a .tab_content.dimmed .sectionname {
+    color: $gray-700;
+}
+
+#page-my-index {
+    .db-action-block {
+        width: 100%;
+        border-color: $primary;
+        border-width: 1px;
+        color: $primary;
+    }
+
+    #page-header .card {
+        background-color: transparent;
+    }
+}
+
+// Fix button secondary contrast.
+a:not([href]).btn-secondary {
+    color: white;
+}
+
+.catalog-menu-star {
+    color: white;
+}
+
+#goto-top-link {
+    z-index: 1;
+}
+
+.secondary-navigation .navigation {
+    border-bottom: 0;
+    margin: 0;
+    padding: 0;
+}
+#page.drawers {
+    padding-left: 0;
+    padding-right: 0;
+    div[role="main"] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .main-inner {
+        max-width: $course-content-maxwidth;
+    }
+
+}
+
+@include media-breakpoint-down(lg) {
+    #page.drawers .main-inner {
+        padding: 1.5rem 3rem;
+    }
+}

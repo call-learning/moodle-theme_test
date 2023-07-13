@@ -1,0 +1,119 @@
+// ImtPN
+// Bootswatch
+
+//
+// Color system
+//
+
+$app-gray-1: #d9e1e2 !default;
+$app-gray-2: #888 !default;;
+$app-gray-3: #fafafa !default;;
+$app-blue-1: #00b8de !default;;
+$app-blue-2: #0c2340 !default;;
+
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #eee !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #aaa !default;
+$gray-600: #777 !default;
+$gray-700: #495057 !default;
+$gray-800: #333 !default;
+$gray-900: #222 !default;
+$black: #000 !default;
+
+$blue: #002182 !default;
+$indigo: #6610f2 !default;
+$purple: #9400de !default;
+$pink: #e83e8c !default;
+$red: #e0001e !default;
+$orange: #fd7e14 !default;
+$yellow: #F5E625 !default;
+$green: #4ade00 !default;
+$teal: #20c997 !default;
+$cyan: #369 !default;
+$light-red: #de2500;
+$dark-red: #330800;
+
+
+$info-outline:    #1f7e9a;
+$warning-outline: #a6670e;
+
+@import 'abstracts/colors';
+
+$primary: $imt-standard-primary !default;
+$secondary: $imt-standard-secondary !default;
+$success: $imt-lightgreen !default;
+$info: $imt-darkgrey !default;
+$warning: $imt-orange !default;
+$danger: $imt-darkred !default;
+$light: $white !default;
+$dark: $black !default;
+
+
+// Body
+$body-color:    $imt-darkgrey !default;
+
+// Flat design
+$border-radius:               initial !default;
+$border-radius-lg:            initial !default;
+$border-radius-sm:            initial !default;
+
+$btn-border-radius:           initial !default;
+$btn-border-radius-lg:        initial !default;
+$btn-border-radius-sm:        initial !default;
+
+// Fonts
+
+$font-family-sans-serif: "Helvetica Regular", sans-serif !default;
+$font-family-base: $font-family-sans-serif !default;
+$font-weight-base: initial !default;
+
+$headings-font-family: "Helvetica Bold", sans-serif !default;
+$headings-font-weight: 700 !default;
+$headings-line-height: 1.1 !default;
+
+// Buttons
+
+$input-btn-padding-x: 1rem !default;
+
+// Navbar Dark
+$navbar-dark-hover-color:           rgba($white, 1) !default;
+$navbar-dark-color:                 rgba($white, 1) !default;
+$navbar-dark-brand-color:           rgba($white, 1) !default;
+$navbar-dark-brand-hover-color:     rgba($white, 1) !default;
+
+// Navbar Light
+$navbar-light-color: rgba($black, .8) !default;
+$navbar-light-hover-color: $black !default;
+$navbar-light-active-color: $black !default;
+
+
+// Change navbar height
+
+$navbar-height: 90px !default;
+
+// Navdrawer
+$drawer-width: 285px !default;
+$drawer-width-semi-expanded: 50px !default;
+
+// Pagination
+
+$pagination-hover-color: $white !default;
+$pagination-hover-bg: $primary !default;
+$pagination-hover-border-color: $primary !default;
+
+// Breakpoints
+$screen-sm-max: 767px;
+$screen-md: 768px;
+
+$screen-md-max: 991px;
+$screen-lg: 992px;
+
+$screen-lg-max: 1199px;
+
+$dropdown-link-hover-color: $white;
+$dropdown-link-hover-bg: $primary;
+
+$drawer-height: 140px !default;
