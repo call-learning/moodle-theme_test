@@ -42,7 +42,7 @@ jobs:
           NEW_VERSION: ${{needs.getVersions.outputs.new_version}}
           OLD_VERSION: ${{needs.getVersions.outputs.old_version}}
         run: |
-          if [ $((OLD_VERSION)) < $((NEW_VERSION)) ]; then
+          if [ $(($OLD_VERSION)) < $(($NEW_VERSION)) ]; then
             echo "Le numéro de version a été incrémenté."
             exit 0
           fi
