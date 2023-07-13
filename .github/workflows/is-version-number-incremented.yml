@@ -4,6 +4,9 @@ on: [push]
 jobs:
   check_version:
     runs-on: ubuntu-latest
+    outputs:
+      old_version: ${{ steps.extract_old_version.outputs.old_version }}
+      new_version: ${{ steps.extract_new_version.outputs.new_version }}
 
     steps:
 
@@ -13,25 +16,33 @@ jobs:
             version.php
           sparse-checkout-cone-mode: false
 
-      - name: Extract version number
-        id: extract_version
+      - name: Extract new version number
+        id: extract_new_version
         run: |
           VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
           echo $VERSION
-          echo "::set-output name=version::$VERSION"
+          echo "new_version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Vérifier l'incrémentation du numéro de version
-        id: check_increment
+      - name: Extract old version number
+        id: extract_old_version
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - run: |
+          git checkout HEAD^
+          VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
+          echo $VERSION
+          echo "old_version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Compare versions
+        id: compare_version
         run: |
-          PREVIOUS_VERSION=$(git show HEAD^:${{ steps.changes.outputs.changed_files }} | grep -oP '(\$plugin->version\s*=\s*['"'"'][^'"'"']+['"'"']\s*;)' | grep -oP '(\d+\.\d+\.\d+)')
-          CURRENT_VERSION=${{ steps.extract_version.outputs.version }}
-          
-          if [ "$PREVIOUS_VERSION" = "$CURRENT_VERSION" ]; then
-            echo "Le numéro de version n'a pas été incrémenté."
-            exit 1
+          if [ ${{ steps.extract_old_version.outputs.old_version }} < ${{ steps.extract_new_version.outputs.new_version }} ]; then
+            echo "Le numéro de version a été incrémenté."
+            exit 0
           fi
-          
-          echo "Le numéro de version a été incrémenté."
+          echo "Le numéro de version n'a pas été incrémenté."
+          exit 1
 
       - name: Envoyer une notification
         if: ${{ failure() }}
