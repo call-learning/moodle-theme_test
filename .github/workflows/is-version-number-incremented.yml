@@ -16,9 +16,8 @@ jobs:
       - name: Extract version number
         id: extract_version
         run: |
-          echo $GITHUB_WORKSPACE
           VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
-          
+          echo $VERSION
           echo "::set-output name=version::$VERSION"
 
       - name: Vérifier l'incrémentation du numéro de version
