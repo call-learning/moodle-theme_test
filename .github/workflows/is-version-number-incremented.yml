@@ -21,10 +21,10 @@ jobs:
           
           echo "::set-output name=changed_files::$CHANGED_FILES"
 
-      - name: Extraire le numéro de version
+      - name: Extract version number
         id: extract_version
         run: |
-          VERSION=$(grep -oP '(\$plugin->version\s*=\s*['"'"'][^'"'"']+['"'"']\s*;)' ${{ steps.changes.outputs.changed_files }} | grep -oP '(\d+\.\d+\.\d+)')
+          VERSION=$GITHUB_WORKSPACE | grep version | grep -o -E '[0-9]{10}'
           
           echo "::set-output name=version::$VERSION"
 
