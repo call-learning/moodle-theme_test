@@ -7,13 +7,11 @@ jobs:
 
     steps:
 
-      - name: Get old version
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           sparse-checkout: |
             version.php
           sparse-checkout-cone-mode: false
-        run: git checkout HEAD^
 
       - name: Retrieve changes
         id: changes
