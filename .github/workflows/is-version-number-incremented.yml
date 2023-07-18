@@ -21,7 +21,7 @@ jobs:
         run: |
           VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
           echo $VERSION
-          echo "new_version=$VERSION" >> $GITHUB_OUTPUT
+          echo "new_version=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Extract old version number
         id: extract_old_version
@@ -32,7 +32,7 @@ jobs:
           git checkout HEAD^
           VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
           echo $VERSION
-          echo "old_version=$VERSION" >> $GITHUB_OUTPUT
+          echo "old_version=${VERSION}" >> $GITHUB_OUTPUT
 
   compare-versions:
     runs-on: ubuntu-latest
