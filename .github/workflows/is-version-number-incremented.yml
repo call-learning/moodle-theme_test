@@ -33,7 +33,7 @@ jobs:
         run: |
           git checkout HEAD^
           old_version = cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
-          echo "Old version: $old_version
+          echo "Old version: $old_version"
 
       - name: "Compare versions"
         run: |
