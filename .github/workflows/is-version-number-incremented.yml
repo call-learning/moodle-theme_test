@@ -1,5 +1,5 @@
 name: Vérification du numéro de version du plugin Moodle
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   getVersions:
@@ -25,7 +25,10 @@ jobs:
 
       - name: Extract old version number
         id: extract_old_version
-        run: |
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - run: |
           git checkout HEAD^
           VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
           echo $VERSION
@@ -40,7 +43,7 @@ jobs:
           OLD_VERSION: ${{needs.getVersions.outputs.old_version}}
         run: |
           echo "$OLD_VERSION -> $NEW_VERSION"
-          if [ $(($OLD_VERSION)) < $(($NEW_VERSION)) ]; then
+          if [ $OLD_VERSION < $NEW_VERSION ]; then
             echo "Le numéro de version a été incrémenté."
             exit 0
           fi
