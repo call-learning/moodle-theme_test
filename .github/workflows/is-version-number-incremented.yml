@@ -23,11 +23,14 @@ jobs:
           echo $VERSION
           echo "new_version=${VERSION}" >> $GITHUB_OUTPUT
 
-      - name: "Extract old version number"
-        id: extract_old_version
+      - name: "Get git tree"
+        id: get_git_tree
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
+
+      - name: "Extract old version number"
+        id: extract_old_version
         run: |
           git checkout HEAD^
           VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
