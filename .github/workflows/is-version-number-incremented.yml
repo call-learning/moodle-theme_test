@@ -19,7 +19,7 @@ jobs:
       - name: "Extract new version number"
         id: extract_new_version
         run: |
-          new_version = cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
+          new_version= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
           echo "New version: $new_version"
 
       - name: "Get git tree"
@@ -32,7 +32,7 @@ jobs:
         id: extract_old_version
         run: |
           git checkout HEAD^
-          old_version = cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
+          old_version= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
           echo "Old version: $old_version"
 
       - name: "Compare versions"
