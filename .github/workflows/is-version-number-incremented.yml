@@ -2,15 +2,15 @@ name: Vérification du numéro de version du plugin Moodle
 on: [push, workflow_dispatch]
 
 jobs:
-  getVersions:
+  get_versions:
     runs-on: ubuntu-latest
-    outputs:
-      old_version: ${{ steps.extract_old_version.outputs.old_version }}
-      new_version: ${{ steps.extract_new_version.outputs.new_version }}
+    env:
+      old_version: ""
+      new_version: ""
 
     steps:
-
-      - uses: actions/checkout@v3
+      - name: "Checkout version.php file"
+        uses: actions/checkout@v3
         with:
           sparse-checkout: |
             version.php
@@ -19,9 +19,8 @@ jobs:
       - name: "Extract new version number"
         id: extract_new_version
         run: |
-          VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
-          echo $VERSION
-          echo "new_version=${VERSION}" >> "$GITHUB_OUTPUT"
+          new_version = cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
+          echo "New version: $new_version"
 
       - name: "Get git tree"
         id: get_git_tree
@@ -33,21 +32,13 @@ jobs:
         id: extract_old_version
         run: |
           git checkout HEAD^
-          VERSION= cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
-          echo $VERSION
-          echo "old_version=$VERSION" >> "$GITHUB_OUTPUT"
+          old_version = cat $GITHUB_WORKSPACE/version.php | grep version | grep -o -E '[0-9]{10}'
+          echo "Old version: $old_version
 
-  compare-versions:
-    runs-on: ubuntu-latest
-    needs: getVersions
-    steps:
       - name: "Compare versions"
-        env:
-          NEW_VERSION: ${{needs.getVersions.outputs.new_version}}
-          OLD_VERSION: ${{needs.getVersions.outputs.old_version}}
         run: |
-          echo "$OLD_VERSION -> $NEW_VERSION"
-          if [ $((OLD_VERSION)) < $((NEW_VERSION)) ]; then
+          echo "$old_version -> $new_version"
+          if [ $((old_version)) < $((new_version)) ]; then
             echo "Le numéro de version a été incrémenté."
             exit 0
           fi
